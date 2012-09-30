@@ -7,7 +7,7 @@
 	          <script type="text/javascript" src="gmaps.js"> </script>
 		  <script type="text/javascript" src="core.js"></script>
 		  <script type="text/javascript" src="jquery-1.8.1.min.js"></script>
-		  <link href="style.css" rel="stylesheet" type="text/css"/> 
+		  <link href="css\style.css" rel="stylesheet" type="text/css"/> 
 		  <script type="text/javascript" charset="utf-8">
 		  function showAddress(address) {
 		      if (geocoder) {
@@ -34,7 +34,7 @@
 			  }
 		  </script>
   </head>
-    <body onload="init()"> 
+  <body> 
 	    <div class="content">
 		    <h1 id="main_title">Há incêndio?</h1>
 			    <div id="noticiastitle">
