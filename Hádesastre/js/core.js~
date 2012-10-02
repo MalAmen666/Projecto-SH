@@ -4,8 +4,7 @@ function init(position)
 map = new GMaps({
 div: '#map',
 lat: -12.043333,
-lng: -77.028333
-
+lng: -77.028333,
 });
 
 $('#geocoding_form').submit(function(e){
@@ -63,14 +62,10 @@ map.setContextMenu({
 	    alert("Your browser does not support geolocation");
 	  },
 	  always: function() {
+        	map.setZoom(8);
 	  }
 	});
 
-infoWindow = new google.maps.InfoWindow({});
-map.loadFromKML({
-  url:'http://www.searcharoo.net/SearchKml/newyork.kml',
-  suppressInfoWindows: true,
-});
 
 }
 window.onload = init;
