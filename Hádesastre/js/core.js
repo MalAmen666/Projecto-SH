@@ -66,6 +66,12 @@ map.setContextMenu({
 	  }
 	});
 
+infoWindow = new google.maps.InfoWindow({});
+map.loadFromKML({
+  url:'http://firms.modaps.eosdis.nasa.gov/active_fire/kml/Europe_24h.kml',
+  suppressInfoWindows: true,
+});
+
 }
 window.onload = init;
 
