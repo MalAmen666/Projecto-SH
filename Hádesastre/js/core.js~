@@ -9,22 +9,20 @@ lng: -77.028333,
 
 $('#geocoding_form').submit(function(e){
 e.preventDefault();
-		GMaps.geocode({
-			address: $('#address').val().trim(),
-			callback: function(results, status){
-			if(status=='OK'){
-			var latlng = results[0].geometry.location;
-			map.setCenter(latlng.lat(), latlng.lng());
-			map.addMarker({
-			lat: latlng.lat(),
-			lng: latlng.lng()
-			});
-		}
-			}
+	GMaps.geocode({
+		address: $('#address').val().trim(),
+		callback: function(results, status){
+		if(status=='OK'){
+		var latlng = results[0].geometry.location;
+		map.setCenter(latlng.lat(), latlng.lng());
+		map.addMarker({
+		lat: latlng.lat(),
+		lng: latlng.lng()
 		});
-	}); 
-
-
+	}
+		}
+	});
+}); 
 map.setContextMenu({
   control: 'map',
   options: [{
@@ -47,24 +45,36 @@ map.setContextMenu({
   }]
 });
 	//geolocalização
-	GMaps.geolocate({
-	  success: function(position) {
-	    map.setCenter(position.coords.latitude, position.coords.longitude);
-	    map.addMarker({
-			lat: position.coords.latitude, 
-			lng: position.coords.longitude
-			});
-	  },
-	  error: function(error) {
-	    alert('Geolocation failed: '+error.message);
-	  },
-	  not_supported: function() {
-	    alert("Your browser does not support geolocation");
-	  },
-	  always: function() {
-        	map.setZoom(8);
-	  }
-	});
+GMaps.geolocate({
+  success: function(position) {
+    map.setCenter(position.coords.latitude, position.coords.longitude);
+    map.addMarker({
+		lat: position.coords.latitude, 
+		lng: position.coords.longitude
+		});
+  },
+  error: function(error) {
+    alert('Geolocation failed: '+error.message);
+  },
+  not_supported: function() {
+    alert("Your browser does not support geolocation");
+  },
+  always: function() {
+	map.setZoom(8);
+  }
+});
+infoWindow = new google.maps.InfoWindow({});
+map.loadFromKML({
+  url: 'http://firms.modaps.eosdis.nasa.gov/active_fire/kml/Europe_24h.kml',
+  suppressInfoWindows: true,
+  events: {
+    click: function(point){
+      infoWindow.setContent(point.featureData.infoWindowHtml);
+      infoWindow.setPosition(point.latLng);
+      infoWindow.open(map.map);
+    }
+  }
+});
 
 
 }
