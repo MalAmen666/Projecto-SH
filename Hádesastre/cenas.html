@@ -29,7 +29,7 @@
 								GEvent.trigger(marker, "click");
 							}
 						}
-						);
+					);
 				}
 			}
 		</script>
@@ -37,38 +37,49 @@
 
 	<body> 
 		<div class="content">
-			<h1 id="main_title">Há incêndio?</h1>
-			<div id="noticiastitle">
-				<h2>News</h2>
-				<ul>
-					<li><a id="one" href="#"></a></li> 
-					<li><a id="two" href="#"></a></li> 
-					<li><a id="three" href="#"></a></li> 
-					<li><a id="four" href="#"></a></li> 
-				</ul>
+			<!-- Título da página -->
+			<div class="fullwidth center">
+				<h1 id="main_title">Há incêndio?</h1>
 			</div>
-			<div class="poppin">
-				<div id="map"> </div>
-			</div>
-			<form id="geocoding_form" method="post">
-				<label for="address"><label>
+			
+			<!-- Search bar -->
+			<div id="header" class="fullwidth">
 				<div id="input">
-					<input type="text" id="address"> 
-					<input id="search_button" type="submit" value="Search" class="btn">
+					<form id="geocoding_form" method="post">
+						<label for="address"><label>
+							<input type="text" id="address"> 
+							<input id="search_button" type="submit" value="Search" class="btn">
+					</form>
 				</div>
-			</form>
-
+			</div>
+			
+			<!-- Center -->
+			<div id="center">
+				<!-- Mapa -->
+				<div class="poppin" style="padding-right:100px;display: inline-block;">
+					<div id="map"> </div>
+				</div>
+				
+				<!-- Notícias -->
+				<div id="noticias" style="display: inline-block;">
+					<h2>News</h2>
+					<ul>
+						<li><a id="one" href="#"></a></li> 
+						<li><a id="two" href="#"></a></li> 
+						<li><a id="three" href="#"></a></li> 
+						<li><a id="four" href="#"></a></li> 
+					</ul>
+				</div>
+			</div>
+			
 		</div>
-		<div id="noticias"> </div>
 		<div id="footer">
 			<input type="button" id="route_button" value="Route">
 			<input type="button" id="chat_button" value="Chat">
 		</div>
 
-
 		<article>
 		</article>
-
 
 	</body>
 

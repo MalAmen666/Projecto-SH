@@ -1,25 +1,29 @@
+.fullwidth {
+	width: 100%;
+}
+.center {
+	text-align: center;
+}
+
 #main_title {
-	position: relative;
-	right: -400px;
 	font-family: 'Convergence';
 	color: #727272;	
 	text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.26);
-	width: 20%;
 	
 }
-#noticiastitle {
+/*#noticiastitle {
 	position: relative;
 	float: right;
 	bottom: 30px;
 	right: 200px;
 }
-#geocoding_form{
+/*#geocoding_form{
 	position: relative;
 	float: left;
 	bottom: 500px;
 	left: 30px;
 	margin-top: 39px;
-}
+}*/
 
 
 .poppin{
@@ -41,7 +45,12 @@
 }
 
 #noticias {
-	  position: relative;
+	width: 100 px;
+	position: absolute;
+	right: 0;
+	height: 100%;
+	background: rgb(100,100,0);
+	  /*position: relative;
 	  bottom: 405px; 
 	  margin: 0;
 	  margin-right: 10px;
@@ -49,7 +58,7 @@
 	  width: 300px;
 	  height: 400px;
 	  background:#cccccc;
-	  float: right;
+	  float: right;*/
 }
 
 #search_button{
