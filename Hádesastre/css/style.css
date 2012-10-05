@@ -31,12 +31,14 @@
     	border-radius: 2px 2px 2px 2px;
     	box-shadow: 0 0 20px #999999;
     	padding: 15px;
-	position: relative;	
+	margin-left: 10px;
+	margin-right: 200px;
+/*	position: relative;	
 	left:10px;
 	width: 70%;
 	height: 400px;
-	margin-left: 10px;
-	top: 20px;
+	
+	top: 20px;*/
 }
 #map {
 	width: 90%;	
@@ -45,9 +47,9 @@
 }
 
 #noticias {
-	width: 100 px;
+	width: 200 px;
 	position: absolute;
-	right: 0;
+/*	right: 0;
 	height: 100%;
 	background: rgb(100,100,0);
 	  /*position: relative;
