@@ -29,7 +29,8 @@
 
 #noticias {
 	width: 200 px;
-	position: absolute;
+	/*position: absolute;*/
+	background: #3B6895;
 }
 
 #search_button{
