@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #main_title {
 	position: relative;
 	right: -400px;
@@ -146,3 +147,72 @@ a, a:visited {
 }
 
 
+=======
+.fullwidth {
+	width: 100%;
+}
+.center {
+	text-align: center;
+}
+
+#main_title {
+	font-family: 'Convergence';
+	color: #727272;	
+	text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.26);
+	
+}
+
+
+.poppin{
+	background: none repeat scroll 0 0 #FFFFFF;
+    	border-radius: 2px 2px 2px 2px;
+    	box-shadow: 0 0 20px #999999;
+    	padding: 15px;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+#map {
+	width: auto;	
+	height: 350px;
+	margin: 20px 20px;
+}
+
+#noticias {
+	width: 200 px;
+	/*position: absolute;*/
+	background: #3B6895;
+}
+
+#search_button{
+	  background: -moz-linear-gradient(center bottom , #3B6895 50%, #4477AA 100%) repeat scroll 0 0 #4477AA;
+	  border-style: solid;
+	  border-width: 1px;
+	  color: #FFFFFF;
+	  border-radius: 3px 3px 3px 3px;
+	  padding: 10px 30px;
+}
+#footer{
+	background: #cccccc;
+	margin: 20px 20px 20px 20px;
+	padding: 10px;
+}
+
+#route_button{
+	background: -moz-linear-gradient(center bottom , #3B6895 50%, #4477AA 100%) repeat scroll 0 0 #4477AA;
+	border-style: solid;
+	border-width: 1px;
+	color: #FFFFFF;
+	border-radius: 3px 3px 3px 3px;
+	padding: 10px 20px;
+}
+
+#chat_button{
+	  background: -moz-linear-gradient(center bottom , #3B6895 50%, #4477AA 100%) repeat scroll 0 0 #4477AA;
+	  border-style: solid;
+	  border-width: 1px;
+	  color: #FFFFFF;
+	  border-radius: 3px 3px 3px 3px;
+	  padding: 10px 30px;
+	  margin-left: 10px;
+}
+>>>>>>> upstream/master
