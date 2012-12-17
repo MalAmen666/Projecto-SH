@@ -3,11 +3,15 @@
   <head>
 	  <meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type">
 	  <title>Há incêndio?</title>
+		  <link href="css\style.css" rel="stylesheet" type="text/css"/> 
+		  <link href="css\jscroll.css" type="text/css" rel="stylesheet">
 		  <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 	          <script type="text/javascript" src="js\gmaps.js"> </script>
 		  <script type="text/javascript" src="js\core.js"></script>
 		  <script type="text/javascript" src="js\jquery-1.8.1.min.js"></script>
-		  <link href="css\style.css" rel="stylesheet" type="text/css"/> 
+		  <script type="text/javascript" src="js\jquery.mousewheel.js"></script>
+		  <script type="text/javascript" src="js\twitterscript.js"></script>
+		  <script type="text/javascript" src="js\scroll.js"></script>
 		  <script type="text/javascript" charset="utf-8">
 		  function showAddress(address) {
 		      if (geocoder) {
@@ -32,7 +36,269 @@
 				);
 			      }
 			  }
+
 		  </script>
+<script type="text/javascript" >
+/* =======================================================
+* ypSimpleScroll
+* 3/11/2001
+* 
+* http://www.youngpup.net/
+* ======================================================= */
+
+// Modified by Sergi Meseguer (www.zigotica.com) 04/2004
+// Now it works with dragger and can use multiple instances in a page
+
+
+
+ypSimpleScroll.prototype.scrollNorth = function(count) { this.startScroll(90, count) }
+ypSimpleScroll.prototype.scrollSouth = function(count) { this.startScroll(270, count) }
+ypSimpleScroll.prototype.scrollWest = function(count) { this.startScroll(180, count) }
+ypSimpleScroll.prototype.scrollEast = function(count) { this.startScroll(0, count) }
+
+ypSimpleScroll.prototype.startScroll = function(deg, count) {
+  if (this.loaded){
+    if (this.aniTimer) window.clearTimeout(this.aniTimer)
+    this.overrideScrollAngle(deg)
+    this.speed = this.origSpeed
+    this.lastTime = (new Date()).getTime() - this.y.minRes
+    this.aniTimer = window.setTimeout(this.gRef + ".scroll('"+deg+"','"+count+"')", this.y.minRes)
+  }
+}
+
+ypSimpleScroll.prototype.endScroll = function() {
+  if (this.loaded){
+    window.clearTimeout(this.aniTimer)
+    this.aniTimer = 0;
+    this.speed = this.origSpeed
+  }
+}
+
+ypSimpleScroll.prototype.overrideScrollAngle = function(deg) {
+  if (this.loaded){
+    deg = deg % 360
+    if (deg % 90 == 0) {
+      var cos = deg == 0 ? 1 : deg == 180 ? -1 : 0
+      var sin = deg == 90 ? -1 : deg == 270 ? 1 : 0
+    } 
+    else {
+      var angle = deg * Math.PI / 180
+      var cos = Math.cos(angle)
+      var sin = Math.sin(angle)
+      sin = -sin
+    }
+    this.fx = cos / (Math.abs(cos) + Math.abs(sin))
+    this.fy = sin / (Math.abs(cos) + Math.abs(sin))
+    this.stopH = deg == 90 || deg == 270 ? this.scrollLeft : deg < 90 || deg > 270 ? this.scrollW : 0
+    this.stopV = deg == 0 || deg == 180 ? this.scrollTop : deg < 180 ? 0 : this.scrollH
+  }
+}
+
+ypSimpleScroll.prototype.overrideScrollSpeed = function(speed) {
+  if (this.loaded) this.speed = speed
+}
+
+
+ypSimpleScroll.prototype.scrollTo = function(stopH, stopV, aniLen) {
+  if (this.loaded){
+    if (stopH != this.scrollLeft || stopV != this.scrollTop) {
+      if (this.aniTimer) window.clearTimeout(this.aniTimer)
+      this.lastTime = (new Date()).getTime()
+      var dx = Math.abs(stopH - this.scrollLeft)
+      var dy = Math.abs(stopV - this.scrollTop)
+      var d = Math.sqrt(Math.pow(dx,2) + Math.pow(dy,2))
+      this.fx = (stopH - this.scrollLeft) / (dx + dy)
+      this.fy = (stopV - this.scrollTop) / (dx + dy)
+      this.stopH = stopH
+      this.stopV = stopV
+      this.speed = d / aniLen * 1000
+      window.setTimeout(this.gRef + ".scroll()", this.y.minRes)
+    }
+  }
+}
+
+ypSimpleScroll.prototype.jumpTo = function(nx, ny) { 
+  if (this.loaded){
+    nx = Math.min(Math.max(nx, 0), this.scrollW)
+    ny = Math.min(Math.max(ny, 0), this.scrollH)
+    this.scrollLeft = nx
+    this.scrollTop = ny
+    if (this.y.ns4)this.content.moveTo(-nx, -ny)
+    else {
+      this.content.style.left = -nx + "px"
+      this.content.style.top = -ny + "px"
+    }
+  }
+}
+
+ypSimpleScroll.minRes = 10
+ypSimpleScroll.ie = document.all ? 1 : 0
+ypSimpleScroll.ns4 = document.layers ? 1 : 0
+ypSimpleScroll.dom = document.getElementById ? 1 : 0
+ypSimpleScroll.mac = navigator.platform == "MacPPC"
+ypSimpleScroll.mo5 = document.getElementById && !document.all ? 1 : 0
+
+ypSimpleScroll.prototype.scroll = function(deg,count) {
+  this.aniTimer = window.setTimeout(this.gRef + ".scroll('"+deg+"','"+count+"')", this.y.minRes)
+  var nt = (new Date()).getTime()
+  var d = Math.round((nt - this.lastTime) / 1000 * this.speed)
+  if (d > 0){
+    var nx = d * this.fx + this.scrollLeft
+    var ny = d * this.fy + this.scrollTop
+    var xOut = (nx >= this.scrollLeft && nx >= this.stopH) || (nx <= this.scrollLeft && nx <= this.stopH)
+    var yOut = (ny >= this.scrollTop && ny >= this.stopV) || (ny <= this.scrollTop && ny <= this.stopV)
+    if (nt - this.lastTime != 0 && 
+      ((this.fx == 0 && this.fy == 0) || 
+      (this.fy == 0 && xOut) || 
+      (this.fx == 0 && yOut) || 
+      (this.fx != 0 && this.fy != 0 && 
+      xOut && yOut))) {
+      this.jumpTo(this.stopH, this.stopV)
+      this.endScroll()
+    }
+    else {
+      this.jumpTo(nx, ny)
+      this.lastTime = nt
+    }
+  // (zgtc) now we also update dragger position:
+  if(deg=='270')  theThumb[count].style.top = parseInt(((theThumb[count].maxY-theThumb[count].minY)*this.scrollTop/this.stopV)+theThumb[count].minY) + "px"; //ok nomes down
+  if(deg=='90')  theThumb[count].style.top = parseInt(((theThumb[count].maxY-theThumb[count].minY)*this.scrollTop/this.scrollH)+theThumb[count].minY) + "px"; //ok nomes down
+  }
+}
+
+function ypSimpleScroll(id, left, top, width, height, speed) {
+  var y = this.y = ypSimpleScroll
+  if (document.layers && !y.ns4) history.go(0)
+  if (y.ie || y.ns4 || y.dom) {
+    this.loaded = false
+    this.id = id
+    this.origSpeed = speed
+    this.aniTimer = false
+    this.op = ""
+    this.lastTime = 0
+    this.clipH = height
+    this.clipW = width
+    this.scrollTop = 0
+    this.scrollLeft = 0
+    this.gRef = "ypSimpleScroll_"+id
+    eval(this.gRef+"=this")
+    var d = document
+    d.write('<style type="text/css">')
+    d.write('#' + this.id + 'Container { left:' + left + 'px; top:' + top + 'px; width:' + width + 'px; height:' + height + 'px; clip:rect(0 ' + width + ' ' + height + ' 0); overflow:hidden; }')
+    d.write('#' + this.id + 'Container, #' + this.id + 'Content { position:absolute; }')
+    d.write('#' + this.id + 'Content { left:' + (-this.scrollLeft) + 'px; top:' + (-this.scrollTop) + 'px; width:' + width + 'px; }')
+    // (zgtc) fix to overwrite p/div/ul width (would be clipped if wider than scroller in css):
+    d.write('#' + this.id + 'Container p, #' + this.id + 'Container div {width:' + parseInt(width-10) + 'px; }')
+    d.write('</style>')
+  }
+}
+
+ypSimpleScroll.prototype.load = function() {
+  var d, lyrId1, lyrId2
+  d = document
+  lyrId1 = this.id + "Container"
+  lyrId2 = this.id + "Content"
+  this.container = this.y.dom ? d.getElementById(lyrId1) : this.y.ie ? d.all[lyrId1] : d.layers[lyrId1]
+  this.content = obj2 = this.y.ns4 ? this.container.layers[lyrId2] : this.y.ie ? d.all[lyrId2] : d.getElementById(lyrId2)
+  this.docH = Math.max(this.y.ns4 ? this.content.document.height : this.content.offsetHeight, this.clipH)
+  this.docW = Math.max(this.y.ns4 ? this.content.document.width : this.content.offsetWidth, this.clipW)
+  this.scrollH = this.docH - this.clipH
+  this.scrollW = this.docW - this.clipW
+  this.loaded = true
+  this.scrollLeft = Math.max(Math.min(this.scrollLeft, this.scrollW),0)
+  this.scrollTop = Math.max(Math.min(this.scrollTop, this.scrollH),0)
+  this.jumpTo(this.scrollLeft, this.scrollTop)
+}
+</script>
+<!-- scroller.js -->
+<script type="text/javascript">
+
+
+// ==============================================================
+// HANDLES SCROLLER/S
+// Modified from Aaron Boodman http://webapp.youngpup.net/?request=/components/ypSimpleScroll.xml
+// mixed ypSimpleScroll with dom-drag script and allowed multiple scrolelrs through array instances
+// (c)2004 Sergi Meseguer (http://zigotica.com/), 04/2004:
+// ==============================================================
+var theHandle = []; var theRoot = []; var theThumb = []; var theScroll = []; var thumbTravel = []; var ratio = [];
+
+function instantiateScroller(count, id, left, top, width, height, speed){
+  if(document.getElementById) {
+    theScroll[count] = new ypSimpleScroll(id, left, top, width, height, speed);
+  }
+}
+
+function createDragger(count, handler, root, thumb, minX, maxX, minY, maxY){
+    var buttons = '<div class="up" id="up'+count+'">'+
+                  '<a href="#" onmouseover="theScroll['+count+'].scrollNorth(\''+count+'\')" '+
+                  'onmouseout="theScroll['+count+'].endScroll()" onclick="return false;">'+
+                  '<img src="textScrollUp.gif" width="15" height="15"></a></div>'+
+                  '<div class="dn"  id="dn'+count+'"">'+
+                  '<a href="#" onmouseover="theScroll['+count+'].scrollSouth(\''+count+'\')" '+
+                  'onmouseout="theScroll['+count+'].endScroll()" onclick="return false;">'+
+                  '<img src="textScrollDown.gif" width="15" height="15"></a></div>'+
+                  '<div class="thumb" id="'+thumb+'" style="left: 135px; top: 15px;">'+
+                  '<img src="brownThumb.gif" width="15" height="15"></div>';
+    
+    
+    document.getElementById(root).innerHTML = buttons + document.getElementById(root).innerHTML;
+
+    theRoot[count]   = document.getElementById(root);
+    theThumb[count]  = document.getElementById(thumb);
+    var thisup = document.getElementById("up"+count);
+    var thisdn = document.getElementById("dn"+count);
+    theThumb[count].style.left = parseInt(minX+15) + "px";
+    thisup.style.left = parseInt(minX+15) + "px";
+    thisdn.style.left = parseInt(minX+15) + "px";
+    theThumb[count].style.border =0;
+    theThumb[count].style.top = parseInt(minY) + "px";
+    thisup.style.top = 0 + "px";
+    thisdn.style.top = parseInt(minY+maxY) + "px";
+    //thisdn.style.top = 15 + "px";
+
+    theScroll[count].load();
+
+    //Drag.init(theHandle[count], theRoot[count]); //not draggable on screen
+    Drag.init(theThumb[count], null, minX+15, maxX+15, minY, maxY);
+    
+    // the number of pixels the thumb can travel vertically (max - min)
+    thumbTravel[count] = theThumb[count].maxY - theThumb[count].minY;
+
+    // the ratio between scroller movement and thumbMovement
+    ratio[count] = theScroll[count].scrollH / thumbTravel[count];
+
+    theThumb[count].onDrag = function(x, y) {
+      theScroll[count].jumpTo(null, Math.round((y - theThumb[count].minY) * ratio[count]));
+    }
+}  
+
+// INITIALIZER:
+// ==============================================================
+// ala Simon Willison http://simon.incutio.com/archive/2004/05/26/addLoadEvent
+function addLoadEvent(fn) {
+      var old = window.onload;
+      if (typeof window.onload != 'function') {
+         window.onload = fn;
+      }
+      else {
+         window.onload = function() {
+         old();
+         fn();
+         }
+      }
+   }
+addLoadEvent(function(){
+    if(theScroll.length>0) {
+    for(var i=0;i<theScroll.length;i++){
+      createDragger(i, "handle"+i, "root"+i, "thumb"+i, theScroll[i].clipW, theScroll[i].clipW, 15, theScroll[i].clipH-30);
+    }
+  }
+}) 
+</script>
+<script type="text/javascript">
+  instantiateScroller(0, "tweet-container", 7, 0, 300, 150, 150);
+</script>
+		  
   </head>
 
   <body> 
@@ -59,17 +325,27 @@
 							</form>		
 								
 	    </div>
-		<div id="noticias"> </div>
+	    <div id="twitter-ticker" class="tweets"> 
+
+			<div id="tweet-container" class="tweet-container"><img id="loading" src="img/loading.gif" width="16" height="11" alt="Loading.." /></div>
+			<!-- The loading gif animation - hidden once the tweets are loaded -->
+
+			<div id="scroll"></div>
+			<!-- Container for the tweets -->
+
+		    </div>
 			<div id="footer">
-				<input type="button" id="route_button" value="Route">
-				<input type="button" id="chat_button" value="Chat">
+				<input type="button" onclick="showMarkers();return false;" id="chat_button" value="Teste">
+				<input type="submit" onclick="calcRoute();return false;" value="Get Directions!">
+				<input type="submit" onclick="clearOverlays();return false;" value="Limpar Marcadores">
+				<input type="submit" onclick="showFireDepartment();return false;" value="Mostrar Bombeiros">
+				<input type="submit" onclick="showHospital();return false;" value="Mostrar Hospitais">
 			</div>
 
 			
 <article>
 </article>
 			
-
     </body>
 
 </html>
