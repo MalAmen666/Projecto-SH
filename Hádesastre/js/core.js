@@ -112,14 +112,15 @@ window.onload = init;
  * */
 function calcRoute() {
 
-/*var originLat = markersArray[0].getPosition().lat();
+var originLat = markersArray[0].getPosition().lat();
 var originLng = markersArray[0].getPosition().lng();
 
 var destLat = markersArray[1].getPosition().lat();
-var destLng = markersArray[1].getPosition().lng();*/
+var destLng = markersArray[1].getPosition().lng();
+
 map.drawRoute({
-  origin:[38.726367,-9.149737], 
-  destination:[38.712572,-9.138322], 
+  origin:[originLat, originLng],
+  destination:[destLat, destLng],
   travelMode: 'driving',
   strokeColor: '#131540',
   strokeOpacity: 0.6,
@@ -142,7 +143,7 @@ map.travelRoute({
     });
   }
 });
- 
+    
 }
 
 function showMarkers(){

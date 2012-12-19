@@ -1,0 +1,7 @@
+!.gitignore
+
+*.html~
+
+js/*.js~
+*.swp
+.gitignore~
