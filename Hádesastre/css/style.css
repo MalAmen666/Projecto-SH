@@ -1,19 +1,11 @@
-<<<<<<< HEAD
-#main_title {
-	position: relative;
-	right: -400px;
-	font-family: 'Convergence';
-	color: #727272;	
-	text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.26);
-	width: 20%;
-	
-}
+
 #noticiastitle {
 	position: relative;
 	float: right;
 	bottom: 30px;
 	right: 200px;
 }
+/*
 #geocoding_form{
 	position: relative;
 	float: left;
@@ -21,26 +13,7 @@
 	left: 30px;
 	margin-top: 39px;
 }
-
-
-.poppin{
-	background: none repeat scroll 0 0 #FFFFFF;
-    	border-radius: 2px 2px 2px 2px;
-    	box-shadow: 0 0 20px #999999;
-    	padding: 15px;
-	position: relative;	
-	left:10px;
-	width: 70%;
-	height: 400px;
-	margin-left: 10px;
-	top: 20px;
-}
-#map {
-	width: 90%;	
-	height: 350px;
-	margin: 20px auto 20px;
-}
-
+*/
 #twitter-ticker{
 	  position: relative;
 	  bottom: 405px; 
@@ -52,44 +25,6 @@
 	  background:#cccccc;
 	  float: right;
 }
-
-#search_button{
-	  background: -moz-linear-gradient(center bottom , #3B6895 50%, #4477AA 100%) repeat scroll 0 0 #4477AA;
-	  border-style: solid;
-	  border-width: 1px;
-	  color: #FFFFFF;
-	  border-radius: 3px 3px 3px 3px;
-	  padding: 10px 20px;
-}
-#footer{
-	background: #cccccc;
-	width: 72%;
-	height: 100px; 
-	top: 50px;
-	left: 100px;
-	margin: 50px 0px 0px 20px;
-}
-
-#route_button{
-	margin: 30px 0px 0px -200px;
-	background: -moz-linear-gradient(center bottom , #3B6895 50%, #4477AA 100%) repeat scroll 0 0 #4477AA;
-	border-style: solid;
-	border-width: 1px;
-	color: #FFFFFF;
-	border-radius: 3px 3px 3px 3px;
-	padding: 10px 20px;
-}
-
-#chat_button{
-	  background: -moz-linear-gradient(center bottom , #3B6895 50%, #4477AA 100%) repeat scroll 0 0 #4477AA;
-	  border-style: solid;
-	  border-width: 1px;
-	  color: #FFFFFF;
-	  border-radius: 3px 3px 3px 3px;
-	  padding: 10px 30px;
-	  margin-left: 10px;
-}
-
 
 #tweet-container{
 /* This is where the tweets are inserted */
@@ -147,7 +82,6 @@ a, a:visited {
 }
 
 
-=======
 .fullwidth {
 	width: 100%;
 }
@@ -178,11 +112,11 @@ a, a:visited {
 }
 
 #noticias {
-	width: 200 px;
+	width: 200px;
 	/*position: absolute;*/
 	background: #3B6895;
 }
-
+/*
 #search_button{
 	  background: -moz-linear-gradient(center bottom , #3B6895 50%, #4477AA 100%) repeat scroll 0 0 #4477AA;
 	  border-style: solid;
@@ -190,18 +124,31 @@ a, a:visited {
 	  color: #FFFFFF;
 	  border-radius: 3px 3px 3px 3px;
 	  padding: 10px 30px;
-}
+}*/
 #footer{
 	background: #cccccc;
 	margin: 20px 20px 20px 20px;
 	padding: 10px;
 }
 
+input.btn {
+	background: -webkit-gradient(linear, center bottom, center top, from(#3B6895), to(#4477AA));
+	border-style: solid;
+	border-width: 1px;
+	color: #121212;
+	border-radius: 3px 3px 3px 3px;
+	padding: 10px 20px;
+}
+
+.btn:hover {
+	
+}
+/*
 #route_button{
 	background: -moz-linear-gradient(center bottom , #3B6895 50%, #4477AA 100%) repeat scroll 0 0 #4477AA;
 	border-style: solid;
 	border-width: 1px;
-	color: #FFFFFF;
+	color: #121212;
 	border-radius: 3px 3px 3px 3px;
 	padding: 10px 20px;
 }
@@ -215,4 +162,4 @@ a, a:visited {
 	  padding: 10px 30px;
 	  margin-left: 10px;
 }
->>>>>>> upstream/master
+*/
