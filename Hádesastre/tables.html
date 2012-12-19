@@ -51,16 +51,18 @@
 				<h1 id="main_title">Há incêndio?</h1>
 			</div>
 			
-			<!-- Search bar -->
-			<div id="header" class="fullwidth">
-				<div id="input" style="margin-left: 5%;">
-					<form id="geocoding_form" method="post">
-						<label for="address"><label>
-							<input type="text" id="address"> 
-							<input id="search_button" type="submit" value="Search" class="btn">
-					</form>
+			<header>
+				<!-- Search bar -->
+				<div id="header" class="fullwidth">
+					<div id="input" style="margin-left: 5%;">
+						<form id="geocoding_form" method="post">
+							<label for="address"><label>
+								<input type="text" id="address" tabindex="1"> 
+								<input id="search_button" type="submit" value="Search" class="btn" tabindex="2">
+						</form>
+					</div>
 				</div>
-			</div>
+			</header>
 			
 			<!-- Center -->
 			<div id="center">
@@ -77,13 +79,15 @@
 						<td id="cell_noticias_direita" width="250px" style="vertical-align:top;padding-left: 20px;">
 							<!-- Notícias -->
 							<div id="noticias">
-								<h2 style="text-align: center; padding-top: 10px;">News</h2>
-								<ul>
-									<li><a id="one" href="#"></a></li> 
-									<li><a id="two" href="#"></a></li> 
-									<li><a id="three" href="#"></a></li> 
-									<li><a id="four" href="#"></a></li> 
-								</ul>
+								<aside>
+									<h2 style="text-align: center; padding-top: 10px;">News</h2>
+									<ul>
+										<li><a id="one" href="#"></a></li> 
+										<li><a id="two" href="#"></a></li> 
+										<li><a id="three" href="#"></a></li> 
+										<li><a id="four" href="#"></a></li> 
+									</ul>
+								</aside>
 							</div>
 						</td>
 					</tr>
@@ -96,8 +100,8 @@
 			
 			<!-- Footer -->
 			<div id="footer">
-				<input type="button" id="route_button" value="Route" class="btn">
-				<input type="button" id="chat_button" value="Chat" class="btn">
+				<input type="button" id="route_button" value="Route" class="btn" tabindex="3">
+				<input type="button" id="chat_button" value="Chat" class="btn" tabindex="4">
 			</div>
 		</div>
 		
