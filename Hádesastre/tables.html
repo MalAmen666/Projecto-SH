@@ -57,7 +57,7 @@
 					<div id="input" style="margin-left: 5%;" role="search">
 						<form id="geocoding_form" method="post">
 							<label for="address"><label>
-								<input type="text" id="address" tabindex="1"> 
+								<input type="text" id="address" tabindex="1" x-webkit-speech> 
 								<input id="search_button" type="submit" value="Search" class="btn" tabindex="2">
 						</form>
 					</div>
@@ -91,6 +91,11 @@
 							</div>
 						</td>
 					</tr>
+		<tr>
+			<td id="instructions" width="250px" style="padding-top: 10px; display: none"> 
+                        </td>
+		</tr>
+
                     <tr>
                     	<td id="cell_noticias_baixo" width="250px" style="padding-top: 10px; display: none;">
                         </td>
@@ -100,8 +105,11 @@
 			
 			<!-- Footer -->
 			<div id="footer" role="menubar">
-				<input type="button" id="route_button" value="Route" class="btn" tabindex="3" role="menuitem">
-				<input type="button" id="chat_button" value="Chat" class="btn" tabindex="4" role="menuitem">
+				<input type="submit" onclick="calcRoute();return false;" value="Get Directions!">
+				<input type="submit" onclick="clearOverlays();return false;" value="Limpar Marcadores">
+				<input type="submit" onclick="showFireDepartment();return false;" value="Mostrar Bombeiros">
+				<input type="submit" onclick="showHospital();return false;" value="Mostrar Hospitais">
+				
 			</div>
 		</div>
 		

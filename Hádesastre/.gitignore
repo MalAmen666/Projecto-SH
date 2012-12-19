@@ -1,0 +1,8 @@
+!.gitignore
+
+index.html~
+tables.html~
+js/*.js~
+*.swp
+.gitignore~
+.tables.html.swp
