@@ -1,7 +1,7 @@
 !.gitignore
 
-*.html~
-
+index.html~
+tables.html~
 js/*.js~
 *.swp
 .gitignore~
